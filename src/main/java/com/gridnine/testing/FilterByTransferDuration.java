@@ -10,6 +10,7 @@ public class FilterByTransferDuration implements Filtering {
 
     private String message = "Filter by total duration of transfers";
     List<Flight> sortingFlightList = new ArrayList<>();
+    private boolean isLessthan = true;
 
     @Override
     public void message() {
@@ -18,17 +19,18 @@ public class FilterByTransferDuration implements Filtering {
 
     public List<Flight> sortingList(List<Flight> noSortingList, Integer noMoreHour) {
         message();
+        int sumOfHour = 0;
         for (Flight fl : noSortingList) {
             List<Segment> segments = fl.getSegments();
             if (segments.size() > 1) {
                 for (int i = 0; i < segments.size() - 1; i++) {
-                    if (Duration.between(segments.get(i).getArrivalDate(), segments.get(i + 1).getDepartureDate()).toHours() < 2) {
-                        sortingFlightList.add(fl);
-                    }
+                    sumOfHour += Duration.between(segments.get(i).getArrivalDate(), segments.get(i + 1).getDepartureDate()).toHours();
                 }
-            } else {
-                return null;
+                if (sumOfHour <= noMoreHour) {
+                    sortingFlightList.add(fl);
+                }
             }
+
         }
         return sortingFlightList;
     }

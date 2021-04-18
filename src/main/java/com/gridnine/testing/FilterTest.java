@@ -57,21 +57,21 @@ public class FilterTest {
     }
 
     @Test
-    public void TestFilterByTransferDuration(){
-        List<Flight> actual = filterByTransferDuration.sortingList(flightList, 3);
+    public void TestFilterByTransferDuration() {
+        List<Flight> actual = filterByTransferDuration.sortingList(flightList, 2);
         List<Flight> expected = Arrays.asList(flightList.get(2));
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void TestFilterByTransferCount(){
+    public void TestFilterByTransferCount() {
         List<Flight> actual = filterByTransferCount.sortingList(flightList, 1);
         List<Flight> expected = Arrays.asList(flightList.get(0), flightList.get(1), flightList.get(2));
         Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void TestFilterWrongRoute(){
+    public void TestFilterWrongRoute() {
         List<Flight> actual = filteringWrongRoute.sortingList(flightList);
         List<Flight> expected = Arrays.asList(flightList.get(0), flightList.get(2), flightList.get(3));
         Assert.assertEquals(expected, actual);
