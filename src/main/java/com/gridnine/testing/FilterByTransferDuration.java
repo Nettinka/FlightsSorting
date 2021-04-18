@@ -20,10 +20,14 @@ public class FilterByTransferDuration implements Filtering {
         message();
         for (Flight fl : noSortingList) {
             List<Segment> segments = fl.getSegments();
-            for (int i = 0; i < segments.size() - 1; i++) {
-                if (Duration.between(segments.get(i).getArrivalDate(), segments.get(i + 1).getDepartureDate()).toHours() < 2) {
-                    sortingFlightList.add(fl);
+            if (segments.size() > 1) {
+                for (int i = 0; i < segments.size() - 1; i++) {
+                    if (Duration.between(segments.get(i).getArrivalDate(), segments.get(i + 1).getDepartureDate()).toHours() < 2) {
+                        sortingFlightList.add(fl);
+                    }
                 }
+            } else {
+                return null;
             }
         }
         return sortingFlightList;

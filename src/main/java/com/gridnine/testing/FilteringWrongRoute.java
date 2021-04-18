@@ -18,12 +18,18 @@ public class FilteringWrongRoute implements Filtering {
 
     public List<Flight> sortingList(List<Flight> noSortinglist) {
         message();
-        this.sortingFlightList = sortingFlightList;
         for (Flight fl : noSortinglist) {
             List<Segment> segments = fl.getSegments();
+            if (segments.size() == 1) {
+                if (segments.get(0).getDepartureDate().isBefore(segments.get(0).getArrivalDate())) {
+                    sortingFlightList.add(fl);
+                }
+            }
             for (int i = 0; i < segments.size() - 1; i++) {
                 if (segments.get(i).getDepartureDate().isBefore(segments.get(i + 1).getArrivalDate())) {
-                    sortingFlightList.add(fl);
+                    if (!sortingFlightList.contains(fl)) {
+                        sortingFlightList.add(fl);
+                    }
                 }
             }
         }

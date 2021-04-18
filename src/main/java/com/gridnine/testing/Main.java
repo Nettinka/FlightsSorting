@@ -26,8 +26,6 @@ public class Main {
         System.out.println("\nЗадание 3.");
         ftd.sortingList(flightList, 2).forEach(System.out::println);
 
-        FlightsBuilder flightsBuilder = new FlightsBuilder();
-
     }
 
 }
