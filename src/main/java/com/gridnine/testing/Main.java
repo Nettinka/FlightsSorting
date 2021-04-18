@@ -25,6 +25,9 @@ public class Main {
         // (время на земле — это интервал между прилётом одного сегмента и вылетом следующего за ним)
         System.out.println("\nЗадание 3.");
         ftd.sortingList(flightList, 2).forEach(System.out::println);
+
+        FlightsBuilder flightsBuilder = new FlightsBuilder();
+
     }
 
 }

@@ -1,5 +1,3 @@
-//НУЖНО ДЕБАЖИТЬ.Не работает.
-
 package com.gridnine.testing;
 
 
@@ -21,7 +19,7 @@ public class FilterTest {
     FilterByDepartureDate filterByDepartureDate = new FilterByDepartureDate();
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
         flightList.add(flightsBuilder.addNewFlightWithOneSegment(now.minusHours(5), now.plusHours(2)));
         flightList.add(flightsBuilder.addNewFlightWithOneSegment(now.plusHours(2) , now.minusHours(1)));
@@ -29,13 +27,12 @@ public class FilterTest {
         flightList.add(flightsBuilder.addNewFlightWithThreeSegment(now.minusHours(1), now.plusHours(3), now.plusHours(4), now.plusHours(8),
                 now.plusHours(10), now.plusHours(18)));
 
-        flightList = flightsBuilder.getFlightList();
     }
 
     @Test
     public void TestFilterByDepartureDate(){
         List <Flight> actual = filterByDepartureDate.sortingList(flightList, now, now.plusHours(3));
-        List<Flight> expected = Arrays.asList(flightList.get(0), flightList.get(1));
+        List<Flight> expected = Arrays.asList(flightList.get(1), flightList.get(2));
         Assert.assertEquals(expected, actual);
     }
 }
